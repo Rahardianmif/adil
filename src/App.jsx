@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import "./App.css";
 
@@ -11,9 +11,13 @@ import img5 from "./assets/Photo5.jpg";
 import img6 from "./assets/Photo6.jpg";
 import img7 from "./assets/Photo7.jpg";
 
+// Import musik lokal
+import musik from "./assets/music.mp3";
+
 export default function App() {
   const [page, setPage] = useState("intro");
   const [btnPosition, setBtnPosition] = useState(null);
+  const audioRef = useRef(null);
 
   const moveButton = () => {
     const randTop = Math.floor(Math.random() * 70) + 10;
@@ -26,6 +30,49 @@ export default function App() {
   };
 
   const images = [img1, img2, img3, img4, img5, img6, img7];
+  const texts = [
+    "Awal kita ketemu ✨",
+    "Foto pertama yang 'Agak' Propper 💕",
+    "Bareng Kamu",
+    "wleee :p",
+    "1 tahun loh kitaaa 🍭",
+    "Semoga kita selalu bareng, selamanya 🤍",
+    "Aku sayang kamu, lebih dari kemarin 💖",
+  ];
+
+  // Efek autoplay + fade-in/fade-out musik
+  useEffect(() => {
+    if (!audioRef.current) return;
+
+    if (page === "ucapan") {
+      audioRef.current.volume = 0;
+      audioRef.current.play().catch(() => {});
+
+      let vol = 0;
+      const fadeIn = setInterval(() => {
+        if (vol < 0.6) {
+          vol += 0.05;
+          audioRef.current.volume = vol;
+        } else {
+          clearInterval(fadeIn);
+        }
+      }, 300);
+    }
+
+    if (page === "intro") {
+      let vol = audioRef.current.volume;
+      const fadeOut = setInterval(() => {
+        if (vol > 0.05) {
+          vol -= 0.05;
+          audioRef.current.volume = vol;
+        } else {
+          clearInterval(fadeOut);
+          audioRef.current.pause();
+          audioRef.current.currentTime = 0;
+        }
+      }, 300);
+    }
+  }, [page]);
 
   if (page === "intro") {
     return (
@@ -70,6 +117,9 @@ export default function App() {
   if (page === "ucapan") {
     return (
       <div className="ucapan">
+        {/* Musik autoplay */}
+        <audio ref={audioRef} src={musik} loop autoPlay />
+
         {/* Background foto geser */}
         <motion.div
           className="background-scroll"
@@ -111,18 +161,31 @@ export default function App() {
           </button>
         </motion.div>
 
-        {/* Galeri foto tambahan */}
+        {/* Galeri foto + teks romantis */}
         <div className="gallery">
           {images.map((img, i) => (
-            <motion.img
+            <motion.div
               key={i}
-              src={img}
-              alt={`gallery-${i}`}
-              className="gallery-img"
-              whileInView={{ opacity: 1, scale: 1 }}
-              initial={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.6 }}
-            />
+              className="gallery-item"
+              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 50 }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.img
+                src={img}
+                alt={`gallery-${i}`}
+                className="gallery-img"
+                whileHover={{ scale: 1.05 }}
+              />
+              <motion.p
+                className="gallery-text"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.8 }}
+              >
+                {texts[i]}
+              </motion.p>
+            </motion.div>
           ))}
         </div>
       </div>
