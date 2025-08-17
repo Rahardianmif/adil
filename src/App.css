@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap');
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #fce7f3, #f3e8ff);
+  overflow-x: hidden;
+}
+
+/* ===================== INTRO ===================== */
+.intro-screen {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.intro-title {
+  font-family: "Dancing Script", cursive;
+  font-size: 3rem;
+  color: #b91c1c;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+}
+
+.intro-sub {
+  font-size: 1.2rem;
+  color: #4b5563;
+  margin-bottom: 2rem;
+}
+
+.btn-container {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+}
+
+.btn {
+  background: linear-gradient(135deg, #ec4899, #f59e0b);
+  border: none;
+  color: white;
+  padding: 0.8rem 1.6rem;
+  border-radius: 9999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+.btn-nakal {
+  background: linear-gradient(135deg, #6d28d9, #2563eb);
+}
+
+.btn-nakal.absolute {
+  position: absolute;
+}
+
+/* ===================== UCAPAN ===================== */
+.ucapan {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #fdf2f8;
+}
+
+/* Background foto */
+.background-scroll {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  opacity: 0.3;
+}
+
+.bg-img {
+  height: 100vh;
+  width: auto;
+  object-fit: cover;
+}
+
+/* Kartu ucapan */
+.card {
+  position: relative;
+  z-index: 1;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  text-align: center;
+  margin-top: 10vh;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .card {
+    max-width: 400px;
+    padding: 1.5rem;
+    font-size: 1.05rem;
+  }
+}
+
+/* HP kecil */
+@media (max-width: 480px) {
+  .card {
+    max-width: 95%;
+    padding: 1.2rem;
+    font-size: 1rem;
+    border-radius: 12px;
+  }
+}
+
+.title {
+  font-family: "Dancing Script", cursive;
+  font-size: 2.5rem;
+  color: #db2777;
+}
+
+.message {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #374151;
+}
+
+.heart {
+  font-size: 3rem;
+  margin: 1rem 0;
+}
+
+.footer {
+  margin-top: 1rem;
+  font-style: italic;
+  color: #6b7280;
+}
+
+.btn-back {
+  margin-top: 1.5rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 9999px;
+  background: #ec4899;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.btn-back:hover {
+  background: #db2777;
+}
+
+/* Galeri */
+.gallery {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.gallery-img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+.gallery-img:hover {
+  transform: scale(1.05);
+}
+
